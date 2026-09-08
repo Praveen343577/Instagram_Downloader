@@ -4,6 +4,10 @@
 │   │   ├── 🐍 browser.py
 │   │   ├── 🐍 downloader.py
 │   │   └── 🐍 extractor.py
+│   ├── 📁 data
+│   │   ├── 📝 failed.txt
+│   │   ├── 📝 links.txt
+│   │   └── 📝 tracker.db
 │   ├── 📁 db
 │   │   └── 🐍 database.py
 │   ├── 📁 utils
