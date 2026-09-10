@@ -32,8 +32,9 @@ DELAY_MIN = 5.0
 DELAY_MAX = 15.0
 
 # File Paths
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
-DOWNLOADS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "downloads")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+DOWNLOADS_DIR = os.path.join(BASE_DIR, "downloads")
 LINKS_FILE = os.path.join(DATA_DIR, "links.txt")
 FAILED_FILE = os.path.join(DATA_DIR, "failed.txt")
 DB_FILE = os.path.join(DATA_DIR, "tracker.db")

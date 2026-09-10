@@ -1,6 +1,6 @@
 import os
 from playwright.sync_api import Playwright, BrowserContext, Page
-from playwright_stealth import stealth_sync
+from playwright_stealth import Stealth
 
 USER_DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "browser_session")
 
@@ -26,6 +26,6 @@ def init_browser(playwright: Playwright) -> tuple[BrowserContext, Page]:
     page = context.pages[0] if context.pages else context.new_page()
     
     # Apply anti-bot evasions (WebDriver flag removal, navigator spoofing)
-    stealth_sync(page)
+    Stealth().apply_stealth_sync(page)
     
     return context, page
