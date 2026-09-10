@@ -31,13 +31,15 @@ RESOLUTION_HIERARCHY = [
 DELAY_MIN = 5.0
 DELAY_MAX = 15.0
 
-# File Paths
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(BASE_DIR, "data")
-DOWNLOADS_DIR = os.path.join(BASE_DIR, "downloads")
+# File Paths (project-relative)
+BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR   = os.path.join(BASE_DIR, "data")
 LINKS_FILE = os.path.join(DATA_DIR, "links.txt")
 FAILED_FILE = os.path.join(DATA_DIR, "failed.txt")
-DB_FILE = os.path.join(DATA_DIR, "tracker.db")
+DB_FILE    = os.path.join(DATA_DIR, "tracker.db")
+
+# Output Path (external — outside project directory)
+DOWNLOADS_DIR = r"D:\Projects\Project_11\Instagram"
 
 # Status Constants
 STATUS_SUCCESS = "SUCCESS"
