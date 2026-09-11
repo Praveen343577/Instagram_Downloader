@@ -28,8 +28,8 @@ RESOLUTION_HIERARCHY = [
 ]
 
 # Anti-Bot Delay Configuration (Seconds)
-DELAY_MIN = 5.0
-DELAY_MAX = 15.0
+DELAY_MIN = 1.0
+DELAY_MAX = 2.0
 
 # File Paths (project-relative)
 BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
