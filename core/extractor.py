@@ -7,6 +7,7 @@ from config import (
     ERROR_CONTAINER_SELECTOR,
     GRID_SELECTOR,
     ACCOUNT_NAME_SELECTOR,
+    USERNAME_SELECTOR,
     DESCRIPTION_SELECTOR,
     DOWNLOAD_LINK_SELECTOR,
     RESOLUTION_HIERARCHY,
@@ -35,17 +36,24 @@ def extract_media(page: Page, url: str) -> dict:
             return {
                 "status": STATUS_DEADLINK,
                 "account_name": None,
+                "username": None,
                 "description": None,
                 "download_urls": []
             }
             
         # Extract Metadata
         account_name = None
+        username = None
         description = None
         
         acc_locator = page.locator(ACCOUNT_NAME_SELECTOR)
         if acc_locator.count() > 0:
             account_name = acc_locator.first.inner_text().strip()
+            
+        user_locator = page.locator(USERNAME_SELECTOR)
+        if user_locator.count() > 0:
+            raw_username = user_locator.first.inner_text().strip()
+            username = raw_username.lstrip("@")
             
         desc_locator = page.locator(DESCRIPTION_SELECTOR)
         if desc_locator.count() > 0:
@@ -89,6 +97,7 @@ def extract_media(page: Page, url: str) -> dict:
             return {
                 "status": STATUS_FAILED,
                 "account_name": account_name,
+                "username": username,
                 "description": description,
                 "download_urls": []
             }
@@ -96,6 +105,7 @@ def extract_media(page: Page, url: str) -> dict:
         return {
             "status": STATUS_SUCCESS,
             "account_name": account_name,
+            "username": username,
             "description": description,
             "download_urls": download_urls
         }
@@ -104,6 +114,7 @@ def extract_media(page: Page, url: str) -> dict:
         return {
             "status": STATUS_FAILED,
             "account_name": None,
+            "username": None,
             "description": None,
             "download_urls": []
         }
@@ -111,6 +122,7 @@ def extract_media(page: Page, url: str) -> dict:
         return {
             "status": STATUS_FAILED,
             "account_name": None,
+            "username": None,
             "description": None,
             "download_urls": []
         }
