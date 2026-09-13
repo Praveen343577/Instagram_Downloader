@@ -10,6 +10,7 @@ RESULT_CONTAINER_SELECTOR = "#fetch-result"
 ERROR_CONTAINER_SELECTOR = "#fetch-error"
 GRID_SELECTOR = '[data-role="result-grid"]'
 ACCOUNT_NAME_SELECTOR = ".text-brand-ink.truncate"
+USERNAME_SELECTOR = ".text-xs.text-neutral-500.truncate"
 DESCRIPTION_SELECTOR = ".mt-2.text-sm.text-neutral-600.line-clamp-3"
 DOWNLOAD_LINK_SELECTOR = "a[download]"
 
@@ -44,4 +45,4 @@ DOWNLOADS_DIR = r"D:\Projects\Project_11\Instagram"
 # Status Constants
 STATUS_SUCCESS = "SUCCESS"
 STATUS_FAILED = "FAILED"
-STATUS_DEADLINK = "DEADLINK"
+STATUS_DEADLINK = "DEADLINK"            
