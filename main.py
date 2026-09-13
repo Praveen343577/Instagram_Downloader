@@ -48,23 +48,24 @@ def run():
                 extraction_result = extract_media(page, url)
                 status = extraction_result["status"]
                 account_name = extraction_result["account_name"]
+                username = extraction_result["username"]
                 description = extraction_result["description"]
                 download_urls = extraction_result["download_urls"]
 
                 if status == STATUS_DEADLINK:
-                    insert_record(url, None, None, STATUS_DEADLINK)
+                    insert_record(url, None, None, None, STATUS_DEADLINK)
                     record_failure(url)
 
                 elif status == STATUS_SUCCESS:
-                    download_ok = download_files(download_urls, account_name)
+                    download_ok = download_files(download_urls, username)
                     if download_ok:
-                        insert_record(url, account_name, description, STATUS_SUCCESS)
+                        insert_record(url, account_name, username, description, STATUS_SUCCESS)
                     else:
-                        insert_record(url, account_name, description, STATUS_FAILED)
+                        insert_record(url, account_name, username, description, STATUS_FAILED)
                         record_failure(url)
 
                 else:
-                    insert_record(url, account_name, description, STATUS_FAILED)
+                    insert_record(url, account_name, username, description, STATUS_FAILED)
                     record_failure(url)
 
                 time.sleep(random.uniform(DELAY_MIN, DELAY_MAX))
