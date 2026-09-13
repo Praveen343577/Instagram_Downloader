@@ -10,6 +10,7 @@ def init_db():
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 url TEXT UNIQUE NOT NULL,
                 account_name TEXT,
+                username TEXT,
                 description TEXT,
                 status TEXT,
                 download_date DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -24,12 +25,12 @@ def is_downloaded(url: str) -> bool:
         cursor.execute("SELECT 1 FROM downloads WHERE url = ?", (url,))
         return cursor.fetchone() is not None
 
-def insert_record(url: str, account_name: str | None, description: str | None, status: str):
+def insert_record(url: str, account_name: str | None, username: str | None, description: str | None, status: str):
     """Inserts or updates a download record upon sequence completion or explicit failure."""
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.cursor()
         cursor.execute('''
-            INSERT OR REPLACE INTO downloads (url, account_name, description, status)
-            VALUES (?, ?, ?, ?)
-        ''', (url, account_name, description, status))
+            INSERT OR REPLACE INTO downloads (url, account_name, username, description, status)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (url, account_name, username, description, status))
         conn.commit()
