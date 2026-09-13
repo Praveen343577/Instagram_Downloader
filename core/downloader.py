@@ -2,16 +2,17 @@ import httpx
 from urllib.parse import urlparse
 from utils.organizer import get_next_filepath
 
-def download_files(download_urls: list[str], account_name: str | None) -> bool:
+def download_files(download_urls: list[str], username: str | None) -> bool:
     """
     Streams binary media from extracted URLs directly to local disk.
     Determines file extension and requests sequential naming per item.
+    Files are named using the account username (without @).
     """
     if not download_urls:
         return False
         
-    if not account_name:
-        account_name = "unknown_account"
+    if not username:
+        username = "unknown_account"
         
     success = True
     
@@ -28,7 +29,7 @@ def download_files(download_urls: list[str], account_name: str | None) -> bool:
                 else:
                     ext = ".jpg"  # Default fallback for Instagram image blobs
                     
-                filepath = get_next_filepath(account_name, ext)
+                filepath = get_next_filepath(username, ext)
                 
                 # Stream the byte payload to disk to prevent RAM exhaustion on large videos
                 with client.stream("GET", url) as response:
