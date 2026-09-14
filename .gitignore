@@ -80,4 +80,7 @@ logs/
 .pytest_cache/
 .coverage
 htmlcov/
-.tox/
+.tox/
+
+
+TODO.txt
