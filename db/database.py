@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 from config import DB_FILE
 
 def init_db():
@@ -13,7 +14,7 @@ def init_db():
                 username TEXT,
                 description TEXT,
                 status TEXT,
-                download_date DATETIME DEFAULT CURRENT_TIMESTAMP
+                download_date DATETIME
             )
         ''')
         conn.commit()
@@ -29,8 +30,9 @@ def insert_record(url: str, account_name: str | None, username: str | None, desc
     """Inserts or updates a download record upon sequence completion or explicit failure."""
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.cursor()
+        now_local = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
         cursor.execute('''
-            INSERT OR REPLACE INTO downloads (url, account_name, username, description, status)
-            VALUES (?, ?, ?, ?, ?)
-        ''', (url, account_name, username, description, status))
+            INSERT OR REPLACE INTO downloads (url, account_name, username, description, status, download_date)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (url, account_name, username, description, status, now_local))
         conn.commit()
